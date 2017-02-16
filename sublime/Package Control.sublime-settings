@@ -1,0 +1,44 @@
+{
+	"bootstrapped": true,
+	"in_process_packages":
+	[
+	],
+	"installed_packages":
+	[
+		"1337 Color Scheme",
+		"A File Icon",
+		"Babel",
+		"Better CoffeeScript",
+		"Boxy Theme",
+		"BracketHighlighter",
+		"Coffee Color Scheme",
+		"CoffeeCompile",
+		"CoffeeComplete Plus (Autocompletion)",
+		"Color Highlighter",
+		"Ember CLI Snippets",
+		"EmberScript",
+		"Emmet",
+		"GitGutter",
+		"GitStatusBar",
+		"Go To Definition",
+		"Handlebars",
+		"HTML-CSS-JS Prettify",
+		"HTML5",
+		"jQuery",
+		"MaxPane",
+		"Origami",
+		"Package Control",
+		"PlainTasks",
+		"React Coffee Snippets",
+		"Ruby on Rails snippets",
+		"SCSS",
+		"SCSS Compiler",
+		"SCSS Expander",
+		"SCSS Snippets",
+		"SublimeCodeIntel",
+		"SublimeGit",
+		"Syntax Highlighting for Sass",
+		"Theme - Soda",
+		"W3CValidators"
+	]
+}
