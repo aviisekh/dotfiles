@@ -1,0 +1,171 @@
+#!/usr/bin/env ruby
+
+# Git pre-commit hook that catches errors that I commonly make.
+#
+# To intentionally ignore the hook (i.e., when adding an alert call), commit
+# from the command line with "--no-verify"
+#
+# Loosely based on Henrik Nyh's <http://henrik.nyh.se> work (2011-10-08)
+# under the MIT License.
+#
+# Bob Gilmore (dev@bobgilmore.name)
+
+def project_type
+  toplevel = `git rev-parse --show-toplevel`.strip
+  gemfile = File.join(toplevel, 'Gemfile')
+  return 'ruby' if File.exist?(gemfile)
+  package_json = File.join(toplevel, 'package.json')
+  return 'node' if File.exist?(package_json)
+  return nil
+end
+
+def deactivation_message(to_permanently_blank, key, value)
+  %{\nTo permanently #{to_permanently_blank} for this repo, run\ngit config hooks.#{key} #{value}\nand try again.\n\nTo permanently #{to_permanently_blank} it for *all* repos, run\ngit config --global hooks.#{key} #{value}\nand try again.\n--------------}
+end
+
+############# CONFIGURATION
+
+# The two sections of regular expressions below ("forbidden" and "warning")
+# will trigger a commit failure, *if* they are found on an added or edited line.
+
+# "Forbidden" regular expressions
+FORBIDDEN_STRINGS = [
+  /TMP_DEBUG/, # My TextExpander macros for embedding debug code always include this for easy scanning.
+  />>>>>>/,    # Git conflict markers
+  /<<<<<</,    # ''
+  /binding\.pry/,        # pry debugging code
+  /binding\.remote_pry/, # ''
+  /save_and_open_page/,  # Launchy debugging code
+  /debugger/,      # Ruby < 2.0 debugging code
+  /byebug/,        # Ruby >= 2.0 debugging code
+  /logger\.debug/  # I almost never want to commit a (Ruby) call to logger.debug.  error, message, etc., but not debug.
+]
+
+FORBIDDEN_STRINGS_EXCEPT_IN_NODE = [
+  /console\.\w*/,  # JavaScript debug code that would break IE.
+]
+
+USER = ENV["USER"]
+USER_HOME = [
+  Regexp.new("/home/#{USER}"),        # Hard-coded path to user's HOME
+  Regexp.new("/Users/#{USER}"),       # ''
+  Regexp.new("/export/home/#{USER}")  # '' (for a current work config)
+]
+
+# Warning signs that someone is committing a private key
+PRIVATE_KEY_INDICATORS = [
+  /PRIVATE KEY/,
+  /ssh-rsa/
+]
+
+#Warning signs that someone is committing files with secrets.
+SECRET_INDICATORS = [
+  /database\.yml/,
+  /application\.yml/
+]
+
+# Check syntax of Ruby files.  Deactivate if your git app of choice uses a version of Ruby that doesn't support your project.
+# (i.e., on old Mac OS, apps will use Ruby 1.8, which is unaware of the Ruby 1.9 JS hash syntax.)
+CHECK_RUBY_SYNTAX_UNDEFINED = `git config hooks.checkrubysyntax`.strip.empty?
+CHECK_RUBY_SYNTAX = CHECK_RUBY_SYNTAX_UNDEFINED || (`git config hooks.checkrubysyntax`.strip == 'true')
+
+
+PROJECT_TYPE = project_type
+
+############# END OF CONFIGURATION
+
+# Check for "forbidden" and "warning" strings
+
+# Loop over ALL errors and warnings and return ALL problems.
+# I want to report on *all* problems that exist in the commit before aborting,
+# so that anyone calling --no-verify has been informed of all problems first.
+error_found = false
+
+full_diff = `git diff --cached --`
+
+full_diff.scan(%r{^\+\+\+ b/(.+)\n@@.*\n([\s\S]*?)(?:^diff|\z)}).each do |file, diff|
+  changed_code_for_file = diff.split("\n").select { |x| x.start_with?("+") }.join("\n")
+  changed_lines_for_file = diff.split("\n").select { |x| x.start_with?("+") }
+  dir = File.dirname(file)
+
+  # Scan for "forbidden" calls
+  FORBIDDEN_STRINGS.each do |re|
+    if changed_code_for_file.match(re)
+      puts %{Error: git pre-commit hook forbids committing "#{$1 || $&}" to #{file}\n--------------}
+      error_found = true
+    end
+  end
+
+  # Scan for "forbidden except in node" calls
+  unless PROJECT_TYPE == 'node'
+    FORBIDDEN_STRINGS_EXCEPT_IN_NODE.each do |re|
+      if changed_code_for_file.match(re)
+        puts %{Error: git pre-commit hook forbids committing "#{$1 || $&}" to #{file}\n-------------}
+        error_found = true
+      end
+    end
+  end
+
+  # Scan for probable HARD_CODED references to user's home directory
+  USER_HOME.each do |re|
+    if changed_code_for_file.match(re)
+      puts %{Error: git pre-commit hook forbids committing what looks like a hard-coded home dir: "#{$1 || $&}" to #{file}\n--------------}
+      error_found = true
+    end
+  end
+
+  # Scan for private key indicators
+  PRIVATE_KEY_INDICATORS.each do |re|
+    if changed_code_for_file.match(re)
+      puts %{Error: git pre-commit hook detected a probable private key commit: "#{$1 || $&}" to #{file}\n--------------}
+      error_found = true
+    end
+  end
+  
+  # Scan for secret file indicators
+  SECRET_INDICATORS.each do |re|
+    if file.match(re)
+      puts %{Error: git pre-commit hook detected a probable secret file commit: "#{$1 || $&}" to #{file}\n--------------}
+      error_found = true
+    end
+  end
+  
+end
+
+#If trying to add an empty file that is prohibited
+full_diff.scan(%r{^diff --git a/(.+) b/.*\nnew file mode}).each do |file|
+  # Scan for secret file indicators. 
+  SECRET_INDICATORS.each do |re|
+    if file[0].match(re)
+      puts %{Error: git pre-commit hook detected a probable secret file commit: "#{$1 || $&}" to #{file}\n--------------}
+      error_found = true
+    end
+  end
+end
+
+name_only_array = `git diff --cached --name-only`.split(/\n/)
+
+# Syntax check .rb files.
+if CHECK_RUBY_SYNTAX
+  toplevel = `git rev-parse --show-toplevel`
+  name_only_array.each do |fil|
+    if File.extname(fil) == '.rb'
+      fullfile = File.join(toplevel.strip, fil)
+      if File.exist?(fullfile)
+        output = `ruby -c #{fullfile}`
+        status = $?.success?
+        unless status
+          puts %{Error: git pre-commit hook found a syntax error in #{fullfile}.\n---------------}
+          error_found = true
+        end
+      end
+    end
+  end
+end
+
+
+# Finally, report errors
+if error_found
+  puts "To commit anyway, use --no-verify"
+  exit 1
+end
