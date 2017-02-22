@@ -97,3 +97,7 @@ export NVM_DIR="/home/aviisekh/.nvm"
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
 
+alias goto_youtube="cd ~/Downloads/youtube"
+alias youtube-dl-mp3="goto_youtube; youtube-dl --extract-audio --audio-format mp3"
+alias youtube-dl="goto_youtube; youtube-dl "
+
