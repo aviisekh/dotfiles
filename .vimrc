@@ -17,7 +17,6 @@ Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-repeat'
 Plugin 'git://git.wincent.com/command-t.git'
 Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
-Plugin 'Valloric/YouCompleteMe'
 Plugin 'ascenator/L9', {'name': 'newL9'}
 Plugin 'flazz/vim-colorschemes'
 Plugin 'tpope/vim-rails'
@@ -28,7 +27,6 @@ Plugin 'rbgrouleff/bclose.vim'
 
 Plugin 'scrooloose/syntastic'
 
-Plugin 'edsono/vim-matchit'
 Plugin 'tmhedberg/SimpylFold'
 Plugin 'mhinz/vim-signify'
 Plugin 'nvie/vim-flake8'
@@ -94,7 +92,6 @@ Plugin 'GertjanReynaert/cobalt2-vim-theme'
 call vundle#end()            " required
 
 filetype plugin indent on    " required
-runtime macros/matchit.vim
 
 
 
@@ -136,7 +133,6 @@ if !exists('g:airline_symbols')
     let g:airline_symbols = {}
 endif
 
-let g:airline#extensions#ycm#enabled = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#show_close_button = 1
 let airline#extensions#tabline#ignore_bufadd_pat ='\c\vgundo|undotree|vimfiler|tagbar|nerd_tree'
@@ -157,13 +153,7 @@ let g:jsx_ext_required = 0
 let g:javascript_enable_domhtmlcss = 1
 let g:used_javascript_libs = 'underscore,react,chai'
 
-" YouCompleteMe
-" remove markdown files from black list
-let g:ycm_filetype_blacklist={'notes': 1, 'unite': 1, 'tagbar': 1, 'pandoc': 1, 'qf': 1, 'vimwiki': 1, 'text': 1, 'infolog': 1, 'mail': 1}
 
-"YCD
-let g:ycm_autoclose_preview_window_after_completion=1
-map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
 "Syntastic Plugins
 set statusline+=%#warningmsg#
@@ -175,7 +165,6 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
-let g:ycm_show_diagnostics_ui = 0
 let g:pymode_lint_on_write = 0
 let g:syntastic_error_symbol = "✗"
 let g:syntastic_warning_symbol = "⚠"
