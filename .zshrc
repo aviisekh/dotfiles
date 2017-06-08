@@ -90,14 +90,16 @@ alias backend="cd ~/Documents/msights/backend/msights_container_1 && rails s --p
 alias goto_backend="cd ~/Documents/msights/backend/msights_container_1"
 alias msights_panes="xte  'keydown Control_L' 'key k' 'keyup Control_L' 'key v' 'keydown Control_L' 'key k' 'keyup Control_L' 'key Up' &&	cd ./msights-frontend && xte  'keydown Control_L' 'key k' 'keyup Control_L' 'key h' 'keydown Control_L' 'key k' 'keyup Control_L' 'key Left' ;xte 'sleep 3' 'keydown Control_L' 'key k' 'keyup Control_L' 'key Right'; ember s "
 
-alias goto_r3="cd ~/Documents/r3/"
+alias goto_r3="cd ~/Documents/R3/"
 export NVM_DIR="/home/aviisekh/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
 
-alias goto_youtube="cd ~/Downloads/youtube"
+alias goto_youtube="cd ~/Videos/youtube"
 alias youtube-dl-mp3="goto_youtube; youtube-dl --extract-audio --audio-format mp3"
 alias youtube-dl="goto_youtube; youtube-dl "
 
+
+eval $(thefuck --alias)
