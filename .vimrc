@@ -1,6 +1,7 @@
 set nocompatible              " be iMproved, required
 filetype off                  " required
-:set shell=/bin/bash
+:set shell=/bin/zsh
+
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -177,3 +178,8 @@ syntax on
 
 set clipboard=unnamed
 set nu
+
+set rtp+=$HOME/.local/lib/python2.7/site-packages/powerline/bindings/vim/
+:set tabstop=4
+:set shiftwidth=4
+:set expandtab

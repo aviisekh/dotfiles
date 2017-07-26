@@ -103,3 +103,4 @@ alias youtube-dl="goto_youtube; youtube-dl "
 
 
 eval $(thefuck --alias)
+export PATH="/home/aviisekh/anaconda2/bin:$PATH"
