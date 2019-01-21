@@ -1,0 +1,12 @@
+// Place your key bindings in this file to override the defaults
+[
+{
+    "key": "ctrl+k l",
+    "command": "workbench.action.focusLeftGroup"
+},
+{
+    "key": "ctrl+k h",
+    "command": "workbench.action.focusRightGroup"
+},
+
+]
