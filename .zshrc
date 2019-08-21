@@ -84,7 +84,15 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+alias fleetpanda="cd /home/aviisekh/Documents/workspace/fleetpanda/business/"
+alias emulator="~/Android/Sdk/emulator/emulator -avd Pixel_2_API_28"
+alias gstash="git stash"
+alias gpop="git stash pop"
 export NVM_DIR="/home/aviisekh/.nvm"
+export FILE="ranger"
+export TERMINAL="st"
+export _JAVA_AWT_WM_NONREPARENTING=1
+
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
