@@ -18,20 +18,18 @@ interval=30
 command=echo -n '  '; df -h -l --output='used' "$HOME" | grep -E -o '[0-9]+G'
 interval=30
 
-# CPU usage
-#
-# The script may be called with -w and -c switches to specify thresholds,
-# see the script for details.
 #[cpu_usage]
 #label=CPU
 #interval=10
 #min_width=CPU: 100.00%
 #separator=false
 
-[battery]
-label=⚡
+[battery2]
+command=~/.local/src/i3blocks-contrib/battery2/battery2
+markup=pango
 interval=30
 
 [rofi-calendar]
-command=~/.local/bin/rofi-calendar
-interval=5
+command=~/.local/src/i3blocks-contrib/rofi-calendar/rofi-calendar
+interval=3600
+label=
