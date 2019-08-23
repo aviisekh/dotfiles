@@ -71,10 +71,10 @@ bindsym $mod+Up focus up
 bindsym $mod+Right workspace next
 
 # move focused window
-bindsym $mod+Shift+$left move left
-bindsym $mod+Shift+$down move down
-bindsym $mod+Shift+$up move up
-bindsym $mod+Shift+$right move right
+#bindsym $mod+Shift+$left move left
+#bindsym $mod+Shift+$down move down
+#bindsym $mod+Shift+$up move up
+#bindsym $mod+Shift+$right move right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Shift+Left move left
@@ -153,7 +153,7 @@ bindsym $mod+Shift+8 move container to workspace $ws8
 bindsym $mod+Shift+9 move container to workspace $ws9
 bindsym $mod+Shift+0 move container to workspace $ws10
 
-bindsym $mod+Tab workspace back_and_forth
+bindsym $mod+Shift+Tab workspace back_and_forth
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -223,15 +223,20 @@ assign [class="Chromium"] $ws2
 assign [class="Slack"] $ws5
 assign [class="Postman"] $ws1
 
-bindsym $mod+n exec dolphin
-exec --no-startup-id slack
-exec --no-startup-id guake
-exec --no-startup-id feh --randomize --bg-scale ~/Pictures/Wallpapers
-
 # Always start VirtualBox and Android emulator instances to workspace 7.
 assign [class="VirtualBox" instance="Qt-subapplication"] $ws7
 assign [class="emulator64-arm"] $ws7
 
-# Increase & decrease brightness (keycodes obtained through xev).
-bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
-bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightness
+
+
+bindsym $mod+n exec 			dolphin
+bindsym $mod+Shift+l 			exec i3lock-fancy 
+bindsym $mod+t				split toggle
+bindsym $mod+o				sticky toggle
+bindsym $mod+Shift+o			floating toggle; sticky toggle; exec --no-startup-id hover left
+#bindsym $mod+Shift+n			floating toggle; sticky toggle; exec --no-startup-id hover right
+
+exec --no-startup-id slack
+exec --no-startup-id guake
+exec --no-startup-id feh --randomize --bg-scale ~/Pictures/Wallpapers
+exec --no-startup-id compton --config ~/.config/compton/compton.conf
