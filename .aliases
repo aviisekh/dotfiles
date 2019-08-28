@@ -1,0 +1,21 @@
+alias fleetpanda="cd /home/aviisekh/Documents/workspace/fleetpanda/business/"
+alias emulator="~/Android/Sdk/emulator/emulator -avd Pixel_2_API_28"
+alias gstash="git stash"
+alias gpop="git stash pop"
+
+# Easy report
+alias ls='ls -Fh --color=auto --group-directories-first'
+alias grep='grep --color=auto'       
+alias cp='cp -iv'
+alias mv='mv -iv'
+alias ln='ln -iv'
+alias rm='rm -i'
+alias rmf='rm -rf'
+alias doc='cd ~/Documents && ls -lA'
+
+# Shortcuts
+alias ip-address='curl -s -H "Accept: application/json" https://ipinfo.io/json | jq "del(.loc, .postal)"'
+alias mp3-dl='youtube-dl --ignore-config --extract-audio \
+    --audio-format "mp3" --audio-quality 0 --embed-thumbnail \
+    --add-metadata --metadata-from-title "%(artist)s - %(title)s" \
+    --output "$HOME/Downloads/%(title)s.%(ext)s"'

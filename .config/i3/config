@@ -124,11 +124,11 @@ set $ws2 "2:  Browser"
 set $ws3 "3:  Code"
 set $ws4 "4:  Code"
 set $ws5 "5:  Slack"
-set $ws6 "6:misc"
-set $ws7 "7:misc"
-set $ws8 "8:misc"
-set $ws9 "9:misc"
-set $ws10 "10:misc"
+set $ws6 "6: misc"
+set $ws7 "7: misc"
+set $ws8 "8: misc"
+set $ws9 "9: misc"
+set $ws10 "10: misc"
 
 
 # switch to workspace
