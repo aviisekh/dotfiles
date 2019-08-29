@@ -1,4 +1,4 @@
-ZSH_THEME="amuse"
+ZSH_THEME="avit"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -44,9 +44,9 @@ ZSH_THEME="amuse"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git)
 
+source ~/.exports
 source $ZSH/oh-my-zsh.sh
 source ~/.aliases 
-source ~/.exports
 source ~/.functions
 
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
