@@ -57,8 +57,18 @@ fshow() {
 #    esac
 #}
 
-# Start fleetpanda server
-fleetserver() {
-   fleetpanda 
-   bundle exec  rails s
+fleetpanda(){
+  local session="fleetpanda"
+ 
+  if [[ -z "$TMUX" ]]; then
+    tmux has-session -t $session 2>/dev/null
+    if [ $? != 0 ]; then
+      tmux new -d -s $session -n main 
+      tmux send-keys -t $session:main "cd ~/Documents/workspace/fleetpanda/business" Enter
+      tmux send-keys -t $session:main "bundle exec rails s" Enter
+      tmux attach -t $session:main
+    else
+      tmux attach-session -t $session
+    fi
+  fi
 }
