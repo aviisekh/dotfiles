@@ -34,15 +34,11 @@ URxvt.boldFont:         xft:inconsolata:pixelsize=13:antialias=true:hinting=true
 URxvt.italicFont:       xft:inconsolata:pixelsize=13:antialias=true:hinting=true, xft:dejavu sans mono:pixelsize=13:antialias=true,hinting=true
 URxvt.bolditalicFont:   xft:inconsolata:pixelsize=13:antialias=true:hinting=true, xft:dejavu sans mono:pixelsize=13:antialias=true,hinting=true
 
-URxvt*font:                 xft:Inconsolata Nerd Font Mono:pixelsize=27:minspace=False, xft:DejaVu Sans:pixelsize=18
-URxvt*boldFont:             xft:Inconsolata Nerd Font Mono:pixelsize=27:minspace=False, xft:DejaVu Sans:pixelsize=18
-URxvt*letterSpace: 0
-
 URxvt.internalBorder:   0
 URxvt.underlineColor:	#999999
 URxvt.cursorBlink:      true
-URxvt.cursorColor:      #850A0C
-URxvt.cursorColor2:     #000000
+URxvt.cursorColor:      white
+URxvt.cursorColor2:     white
 
 URxvt.scrollBar:        False
 URxvt.scrollBar_right:  False
