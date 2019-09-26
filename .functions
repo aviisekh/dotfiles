@@ -24,6 +24,13 @@ weather() {
     curl -s "https://wttr.in/${1:-Ponorogo}?m2" | sed -n "1,27p"
 }
 
+# Direct redirection
+goto() {
+    if [[ $1 == "fleetpanda" ]]; then
+        cd ~/Documents/workspace/fleetpanda/business
+    fi		
+}
+
 # Git commit browser
 fshow() {
     local commit_hash="echo {} | grep -o '[a-f0-9]\{7\}' | head -1"
@@ -58,17 +65,57 @@ fshow() {
 #}
 
 fleetpanda(){
-  local session="fleetpanda"
- 
-  if [[ -z "$TMUX" ]]; then
-    tmux has-session -t $session 2>/dev/null
-    if [ $? != 0 ]; then
-      tmux new -d -s $session -n main 
-      tmux send-keys -t $session:main "cd ~/Documents/workspace/fleetpanda/business" Enter
-      tmux send-keys -t $session:main "bundle exec rails s" Enter
-      tmux attach -t $session:main
-    else
-      tmux attach-session -t $session
+
+  deploy() {
+    goto fleetpanda
+    if [[ $1 == 'dev' ]]; then
+      echo 'deploying dev'
+
+    elif [[ $1 == 'staging' ]]; then
+      echo 'deploying staging'
+
+    elif [[ $1 == 'master' ]]; then
+      echo 'deploying prod'
+
     fi
+  }
+
+  if [[ $1 == 'session' ]]; then
+    local session="fleetpanda"
+    if [[ -z "$TMUX" ]]; then
+      tmux has-session -t $session 2>/dev/null
+      if [ $? != 0 ]; then
+        tmux new -d -s $session -n main 
+        tmux send-keys -t $session:main "goto fleetpanda" Enter
+        tmux send-keys -t $session:main "bundle exec rails s" Enter
+        tmux attach -t $session:main
+      else
+        tmux attach-session -t $session
+      fi
+    fi
+  elif [[ $1 == 'deploy' ]]; then 
+   if [[ $3 == "-f" ]]; then
+    goto fleetpanda && git push fleetpanda-$2 $2:master -f     
+   else
+    goto fleetpanda && git push fleetpanda-$2 $2:master
+   fi 
   fi
 }
+
+# Example function
+#outerfunc1() {
+# innerfunc() { echo "Running inner function #1"; }
+# echo "Running outer function #1"
+# }
+# outerfunc2() {
+# innerfunc() { echo "Running inner function #2"; }
+# echo "Running outer function #2"
+# } 
+ 
+# test()(
+#   if [[ $1 == "abhishek" ]]; then
+#    (goto fleetpanda; ls)
+#   elif [[ $1 == "bhatta" ]]; then
+#     echo "Bhhatta"
+#   fi
+# )
