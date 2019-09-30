@@ -65,21 +65,6 @@ fshow() {
 #}
 
 fleetpanda(){
-
-  deploy() {
-    goto fleetpanda
-    if [[ $1 == 'dev' ]]; then
-      echo 'deploying dev'
-
-    elif [[ $1 == 'staging' ]]; then
-      echo 'deploying staging'
-
-    elif [[ $1 == 'master' ]]; then
-      echo 'deploying prod'
-
-    fi
-  }
-
   if [[ $1 == 'session' ]]; then
     local session="fleetpanda"
     if [[ -z "$TMUX" ]]; then
@@ -95,9 +80,9 @@ fleetpanda(){
     fi
   elif [[ $1 == 'deploy' ]]; then 
    if [[ $3 == "-f" ]]; then
-    goto fleetpanda && git push fleetpanda-$2 $2:master -f     
+    (goto fleetpanda && git push fleetpanda-$2 $2:master -f)     
    else
-    goto fleetpanda && git push fleetpanda-$2 $2:master
+    (goto fleetpanda && git push fleetpanda-$2 $2:master)
    fi 
   fi
 }
