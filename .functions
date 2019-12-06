@@ -80,9 +80,9 @@ fleetpanda(){
     fi
   elif [[ $1 == 'deploy' ]]; then 
    if [[ $3 == "-f" ]]; then
-    (goto fleetpanda && git push fleetpanda-$2 $2:master -f)     
+    (git push fleetpanda-$2 $2:master -f)     
    else
-    (goto fleetpanda && git push fleetpanda-$2 $2:master)
+    (git push fleetpanda-$2 $2:master)
    fi 
   fi
 }
