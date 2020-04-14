@@ -1,4 +1,4 @@
-ZSH_THEME="avit"
+ZSH_THEME="amuse"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
