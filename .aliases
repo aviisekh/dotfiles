@@ -21,4 +21,5 @@ alias mp3-dl='youtube-dl --ignore-config --extract-audio \
 
 alias ta='tmux a'
 alias fd='fleetpanda deploy'
+alias fp='fleetpanda'
 alias fs='fleetpanda session'

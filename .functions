@@ -65,7 +65,9 @@ fshow() {
 #}
 
 fleetpanda(){
-  if [[ $1 == 'session' ]]; then
+  if [[ $# -eq 0 ]]; then 
+    goto fleetpanda	
+  elif [[ $1 == 'session' ]]; then
     local session="fleetpanda"
     if [[ -z "$TMUX" ]]; then
       tmux has-session -t $session 2>/dev/null
