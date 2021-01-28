@@ -27,7 +27,7 @@ weather() {
 # Direct redirection
 goto() {
     if [[ $1 == "fleetpanda" ]]; then
-        cd ~/Documents/workspace/fleetpanda/business
+        cd ~/Documents/workspace/fleetpanda/main
     fi		
 }
 
