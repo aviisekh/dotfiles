@@ -1,5 +1,6 @@
-export ZSH=/home/abhishek/.oh-my-zsh
-export NVM_DIR="/home/abhishek/.nvm"
+export ZSH=/home/aviisekh/.oh-my-zsh
+export NVM_DIR="/home/aviisekh/.nvm"
 export FILE="ranger"
 export TERMINAL="st"
-
+export VISUAL=vim
+export EDITOR="$VISUAL"
