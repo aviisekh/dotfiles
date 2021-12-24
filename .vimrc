@@ -75,17 +75,13 @@ vnoremap <leader>m :norm A # => <Esc>
 
 
 " Show hidden files in NERDtree
-let NERDTreeShowHidden=1
-let NERDTreeQuitOnOpen = 0
-nnoremap <C-b> :NERDTreeToggle<CR>
-
-" For mouse click in NERDTree
-:set mouse=a
-let g:NERDTreeMouseMode=3
-
+" let NERDTreeShowHidden=1
+" let NERDTreeQuitOnOpen = 0
+noremap <C-b> :RangerCurrentDirectory<CR>
+" 
+" " For mouse click in NERDTree
+" :set mouse=a
+" let g:NERDTreeMouseMode=3
+" 
 " Custom Keymappings
 nnoremap <C-p> :GFiles<CR>
-nmap <leader>gh :diffget //3 <CR>
-nmap <leader>gu :diffget //2 <CR>
-nmap <leader>gs :G<CR>
-
