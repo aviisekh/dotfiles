@@ -65,7 +65,11 @@ fshow() {
 #}
 clickup(){ 
   local git_branch=$(git symbolic-ref --short HEAD 2>/dev/null)
-  xdg-open "https://app.clickup.com/t/${1:-$git_branch}"
+  if [ "$(uname -s)" = "Darwin" ]; then
+    open "https://app.clickup.com/t/${1:-$git_branch}"
+  else
+    xdg-open "https://app.clickup.com/t/${1:-$git_branch}"
+  fi
 }
 
 fleetpanda(){
