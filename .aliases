@@ -3,6 +3,7 @@ alias gstash="git stash"
 alias gpop="git stash pop"
 
 # Easy report
+alias vim=nvim
 alias ls='ls -Fh --color=auto --group-directories-first'
 alias grep='grep --color=auto'       
 alias cp='cp -iv'

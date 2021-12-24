@@ -9,6 +9,8 @@ Plug 'vim-airline/vim-airline'
 Plug 'morhetz/gruvbox'
 Plug 'github/copilot.vim'
 Plug 'ryanoasis/vim-devicons'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 call plug#end()
 
 filetype plugin indent on
@@ -29,7 +31,6 @@ set shiftwidth=2
 set softtabstop=2
 set tabstop=2
 set expandtab
-set rtp+=~/.fzf
 set encoding=UTF-8
 set list listchars=tab:\ \ ,trail:·
 set background=dark
@@ -80,7 +81,7 @@ nnoremap <C-b> :NERDTreeToggle<CR>
 let g:NERDTreeMouseMode=3
 
 " Custom Keymappings
-nnoremap <C-p> :FZF<CR>
+nnoremap <C-p> :GFiles<CR>
 nmap <leader>gh :diffget //3 <CR>
 nmap <leader>gu :diffget //2 <CR>
 nmap <leader>gs :G<CR>

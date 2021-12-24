@@ -63,6 +63,10 @@ fshow() {
 #            ;;
 #    esac
 #}
+clickup(){ 
+  local git_branch=$(git symbolic-ref --short HEAD 2>/dev/null)
+  xdg-open "https://app.clickup.com/t/${1:-$git_branch}"
+}
 
 fleetpanda(){
   if [[ $# -eq 0 ]]; then 
