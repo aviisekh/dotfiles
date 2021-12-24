@@ -13,7 +13,7 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'francoiscabrol/ranger.vim'
 Plug 'rbgrouleff/bclose.vim'
-
+Plug 'kevinhwang91/rnvimr'
 call plug#end()
 
 filetype plugin indent on
@@ -78,6 +78,7 @@ vnoremap <leader>m :norm A # => <Esc>
 " let NERDTreeShowHidden=1
 " let NERDTreeQuitOnOpen = 0
 noremap <C-b> :RangerCurrentDirectory<CR>
+noremap <C-b> :RnvimrToggle<CR>
 " 
 " " For mouse click in NERDTree
 " :set mouse=a
