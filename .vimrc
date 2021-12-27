@@ -14,6 +14,8 @@ Plug 'junegunn/fzf.vim'
 Plug 'francoiscabrol/ranger.vim'
 Plug 'rbgrouleff/bclose.vim'
 Plug 'kevinhwang91/rnvimr'
+Plug 'dhruvasagar/vim-zoom'
+Plug 'christoomey/vim-tmux-navigator'
 call plug#end()
 
 filetype plugin indent on
@@ -37,6 +39,13 @@ set expandtab
 set encoding=UTF-8
 set list listchars=tab:\ \ ,trail:·
 set background=dark
+set hlsearch
+set incsearch
+set ignorecase
+set ruler
+set showcmd
+set showmatch
+set showmode
 
 colorscheme gruvbox
 
@@ -46,38 +55,10 @@ colorscheme gruvbox
 " Window pane resizing
 nnoremap <silent> <Leader>[ :exe "resize " . (winheight(0) * 3/2)<CR>
 nnoremap <silent> <Leader>] :exe "resize " . (winheight(0) * 2/3)<CR>
-
-" ===== Seeing Is Believing =====
-" " Assumes you have a Ruby with SiB available in the PATH
-" " If it doesn't work, you may need to `gem install seeing_is_believing -v
-" 3.0.0.beta.6`
-" " ...yeah, current release is a beta, which won't auto-install
-"
-" " Annotate every line
-"
-nmap <leader>b :%!seeing_is_believing --timeout 12 --line-length 500 --number-of-captures 300 --alignment-strategy chunk<CR>;
-"
-"  " Annotate marked lines
-"
-nmap <leader>n :%.!seeing_is_believing --timeout 12 --line-length 500 --number-of-captures 300 --alignment-strategy chunk --xmpfilter-style<CR>;
-"
-"  " Remove annotations
-"
-nmap <leader>c :%.!seeing_is_believing --clean<CR>;
-"
-"  " Mark the current line for annotation
-"
-nnoremap <leader>m A # => <Esc>
-"
-"  " Mark the highlighted lines for annotation
-"
-vnoremap <leader>m :norm A # => <Esc>
-
-
 " Show hidden files in NERDtree
 " let NERDTreeShowHidden=1
 " let NERDTreeQuitOnOpen = 0
-noremap <C-b> :RangerCurrentDirectory<CR>
+" noremap <C-b> :RangerCurrentDirectory<CR>
 noremap <C-b> :RnvimrToggle<CR>
 " 
 " " For mouse click in NERDTree
@@ -86,3 +67,53 @@ noremap <C-b> :RnvimrToggle<CR>
 " 
 " Custom Keymappings
 nnoremap <C-p> :GFiles<CR>
+
+let g:tmux_navigator_no_mappings = 1
+
+" nnoremap <silent> <a-h> :TmuxNavigateLeft<cr>
+" nnoremap <silent> <a-j> :TmuxNavigateDown<cr>
+" nnoremap <silent> <a-k> :TmuxNavigateUp<cr>
+" nnoremap <silent> <a-l> :TmuxNavigateRight<cr>
+" nnoremap <silent> <a-\> :TmuxNavigatePrevious<cr>
+
+
+
+let g:fzf_action = {
+  \ 'ctrl-t': 'tab split',
+  \ 'ctrl-b': 'vsplit',
+  \ 'ctrl-v': 'split',
+  \ 'ctrl-y': {lines -> setreg('*', join(lines, "\n"))}}
+
+" Map a few common things to do with FZF.
+nnoremap <silent> <S-Tab> :Buffers<CR>
+
+" Move 1 more lines up or down in normal and visual selection modes.
+nnoremap <a-k> :m .-2<CR>==
+vnoremap <a-k> :m '<-2<CR>gv=gv
+nnoremap <a-j> :m .+1<CR>==
+vnoremap <a-j> :m '>+1<CR>gv=gv
+nnoremap <a-Up> :m .-2<CR>==
+vnoremap <a-Up> :m '<-2<CR>gv=gv
+nnoremap <a-Down> :m .+1<CR>==
+vnoremap <a-Down> :m '>+1<CR>gv=gv
+
+
+" Select same word with <C-d>
+nnoremap <C-d> <C-n>
+
+" Customize fzf colors to match your color scheme.
+let g:fzf_colors =
+\ { 'fg':      ['fg', 'Normal'],
+  \ 'bg':      ['bg', 'Normal'],
+  \ 'hl':      ['fg', 'Comment'],
+  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+  \ 'hl+':     ['fg', 'Statement'],
+  \ 'info':    ['fg', 'PreProc'],
+  \ 'prompt':  ['fg', 'Conditional'],
+  \ 'pointer': ['fg', 'Exception'],
+  \ 'marker':  ['fg', 'Keyword'],
+  \ 'spinner': ['fg', 'Label'],
+  \ 'header':  ['fg', 'Comment'] }
+
+map <c-d> <c-n>
