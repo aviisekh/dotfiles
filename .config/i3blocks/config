@@ -1,35 +1,35 @@
-command=/usr/share/i3blocks/$BLOCK_NAME
+command=~/.scripts/statusbar/$BLOCK_NAME
 separator_block_width=15
-markup=none
+markup=pango
+
+[music]
+label=🎼
+interval=once
+signal=11
+
+[weather]
+command=curl -Ss 'https://wttr.in?format=%c+%t'
+interval=3600
+color=#A4C2F4
+
+[spotify]
+label=🎵
+command=~/.scripts/statusbar/spotify.py
+interval=5
 
 [volume]
-label=VOL
-label=♪
-instance=Master
-interval=1
+interval=once
 signal=10
-command=/usr/share/i3blocks/volume 5 pulse
 
-[ram]
-command=echo -n '  '; ~/.local/src/i3blocks-contrib/memory/memory | grep -E -o '^[0-9]+.[0-9]G'
+[battery]
+interval=5
+
+# Date Time
+#
+[time]
+label=📅
+command=date '+%a %b %d %Y %H:%M'
 interval=30
 
-[disk-home]
-command=echo -n '  '; df -h -l --output='used' "$HOME" | grep -E -o '[0-9]+G'
-interval=30
-
-#[cpu_usage]
-#label=CPU
-#interval=10
-#min_width=CPU: 100.00%
-#separator=false
-
-[battery2]
-command=~/.local/src/i3blocks-contrib/battery2/battery2
-markup=pango
-interval=30
-
-[rofi-calendar]
-command=~/.local/src/i3blocks-contrib/rofi-calendar/rofi-calendar
-interval=3600
-label=
+[internet]
+interval=10

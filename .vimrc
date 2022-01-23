@@ -16,8 +16,10 @@ Plug 'rbgrouleff/bclose.vim'
 Plug 'kevinhwang91/rnvimr'
 Plug 'dhruvasagar/vim-zoom'
 Plug 'christoomey/vim-tmux-navigator'
+Plug 'airblade/vim-gitgutter'
+Plug 'easymotion/vim-easymotion'
+Plug 'tpope/vim-commentary'
 call plug#end()
-
 filetype plugin indent on
 
 
@@ -59,6 +61,7 @@ nnoremap <silent> <Leader>] :exe "resize " . (winheight(0) * 2/3)<CR>
 " let NERDTreeShowHidden=1
 " let NERDTreeQuitOnOpen = 0
 " noremap <C-b> :RangerCurrentDirectory<CR>
+let g:ranger_map_keys = 0 " Disable default keybindings
 noremap <C-b> :RnvimrToggle<CR>
 " 
 " " For mouse click in NERDTree
@@ -117,3 +120,5 @@ let g:fzf_colors =
   \ 'header':  ['fg', 'Comment'] }
 
 map <c-d> <c-n>
+noremap <C-/> :Commentary<cr>
+
