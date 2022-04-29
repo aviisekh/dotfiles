@@ -15,9 +15,17 @@ bindsym $mod+d exec --no-startup-id rofi -show drun -modi drun -show-icons -them
 bindsym $mod+space exec --no-startup-id rofi -show drun -modi drun -show-icons -theme Arc-Dark
 
 
-# gaps stuffs
-# gaps inner 3
-# gaps outer 1   
+##### i3-gaps ##############
+for_window [class=".*"] border pixel 1 #*
+gaps inner 10
+gaps outer 1
+#gaps horizontal 2
+
+################# i3-radius #######################
+smart_borders on
+smart_borders no_gaps
+border_radius 5
+
 
 # set the arrows
 set $up k
@@ -50,6 +58,8 @@ for_window [instance="dropdown_terminal"] border pixel 3
 for_window [instance="dropdown_dropdowncalc"] border pixel 2
 for_window [instance="dropdown_*"] move position center
 
+# Polybar
+#exec_always --no-startup-id ~/.config/polybar/launch.sh --hack
 
 # Define bar settings
 bar {
@@ -59,7 +69,7 @@ bar {
         status_command i3blocks 
 	bindsym button4         nop
 	bindsym button5         nop
-        position                bottom
+        position                top
         tray_output             primary
         separator_symbol        "·"
         workspace_buttons       yes
@@ -107,7 +117,7 @@ mode "resize" {
 # startup applications
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 exec --no-startup-id nm-applet
-exec --no-startup-id slack
+#exec --no-startup-id slack
 exec --no-startup-id guake
 exec --no-startup-id feh --randomize --bg-scale ~/Pictures/Wallpapers
 exec --no-startup-id compton --config ~/.config/compton/compton.conf
@@ -202,7 +212,7 @@ bindsym $mod+Tab workspace back_and_forth
 
 
 
-bindsym $mod+u			exec --no-startup-id $term -n dropdown_terminal -e tmux
+bindsym $mod+u			exec --no-startup-id $term --class dropdown_terminal -e tmux
 bindsym $mod+g			exec --no-startup-id ddspawn dropdowncalc -f mono:pixelsize=24
 
 bindsym $mod+Shift+y		exec --no-startup-id i3resize left
@@ -212,8 +222,8 @@ bindsym $mod+Shift+o		exec --no-startup-id i3resize right
 
 # ============================================================= End of Key bindings =====================================================
 # workspace assignments
-assign [class="jetbrains-rubymine"] $ws3
-assign [class="Chromium"] $ws2
+# assign [class="jetbrains-rubymine"] $ws3
+assign [class="Google Chrome"] $ws2
 assign [class="Slack"] $ws5
 assign [class="Postman"] $ws1
 

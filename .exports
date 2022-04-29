@@ -4,3 +4,6 @@ export FILE="ranger"
 export TERMINAL="st"
 export VISUAL=vim
 export EDITOR="$VISUAL"
+export ANDROID_HOME=/home/aviisekh/Android/sdk
+export ANDROID_SDK_ROOT=/home/aviisekh/Android/sdk
+export ANDROID_AVD_HOME=/home/aviisekh/.android/avd
