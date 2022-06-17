@@ -1,4 +1,4 @@
-ZSH_THEME="amuse"
+ZSH_THEME="af-magic"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -49,11 +49,12 @@ source $ZSH/oh-my-zsh.sh
 source ~/.aliases 
 source ~/.functions
 source ~/.git-open-pr.sh
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
+source $(brew --prefix nvm)/nvm.sh
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 cat ~/.notes
+
+export NVM_DIR=~/.nvm
+source $(brew --prefix nvm)/nvm.sh
