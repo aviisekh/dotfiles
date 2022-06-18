@@ -80,6 +80,15 @@ pipeline(){
   fi
 }
 
+prs(){ 
+  if [ "$(uname -s)" = "Darwin" ]; then
+    open "https://github.com/FleetPanda/main/pulls"
+  else
+    xdg-open "https://github.com/FleetPanda/main/pulls"
+  fi
+}
+
+
 fleetpanda(){
   if [[ $# -eq 0 ]]; then 
     goto fleetpanda	

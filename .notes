@@ -3,4 +3,6 @@
 3. Remove the highlighted part.
 4. Copy paste from vim to outside.
 5. Copy without line numbers vim.
+6. FP admin password: 8Ftdh6jNr3kAjM_
+7. Cancel heroku build: heroku builds -a YOUR_APP_NAME ; heroku builds:cancel BUILD_ID -a YOUR_APP_NAME
 :smiley:

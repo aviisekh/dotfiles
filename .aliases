@@ -1,4 +1,4 @@
-# alias emulator="~/Android/Sdk/emulator/emulator -avd Pixel_2_API_28"
+alias emulator="~/Android/Sdk/emulator/emulator" # -avd Pixel_2_API_28"
 alias gstash="git stash"
 alias gpop="git stash pop"
 
