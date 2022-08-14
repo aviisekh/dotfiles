@@ -72,6 +72,16 @@ clickup(){
   fi
 }
 
+pipeline(){ 
+  local git_branch=$(git symbolic-ref --short HEAD 2>/dev/null)
+  if [ "$(uname -s)" = "Darwin" ]; then
+    open "https://dashboard.heroku.com/pipelines/35671cad-ce82-4ec6-8cb3-ff5fac810d48"
+  else
+    xdg-open "https://dashboard.heroku.com/pipelines/35671cad-ce82-4ec6-8cb3-ff5fac810d48"
+  fi
+}
+
+
 fleetpanda(){
   if [[ $# -eq 0 ]]; then 
     goto fleetpanda	

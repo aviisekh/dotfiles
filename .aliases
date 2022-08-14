@@ -3,7 +3,7 @@ alias gstash="git stash"
 alias gpop="git stash pop"
 
 # Easy report
-# alias vim=nvim
+alias vim=nvim
 # alias ls='ls -Fh --color=auto --group-directories-first'
 alias grep='grep --color=auto'       
 alias cp='cp -iv'
@@ -12,6 +12,8 @@ alias ln='ln -iv'
 alias rm='rm -i'
 alias rmf='rm -rf'
 alias doc='cd ~/Documents && ls -lA'
+alias dotfiles='cd ~/dotfiles && ls -lA'
+alias note='vim ~/.notes'
 
 # Shortcuts
 alias ip-address='curl -s -H "Accept: application/json" https://ipinfo.io/json | jq "del(.loc, .postal)"'
