@@ -1,4 +1,3 @@
---database=postgresql
 --css=tailwind
 --skip-test
 --skip-helpers
