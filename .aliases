@@ -8,6 +8,7 @@ alias vim=nvim
 alias grep='grep --color=auto'       
 alias cp='cp -iv'
 alias mv='mv -iv'
+alias python='python3.9'
 alias ln='ln -iv'
 alias rm='rm -i'
 alias rmf='rm -rf'

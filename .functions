@@ -1,5 +1,6 @@
 # Clean Debian packages
 apt-clean() {
+
     sudo apt-get clean
     sudo apt-get autoclean
     sudo apt-get autoremove
@@ -72,12 +73,41 @@ clickup(){
   fi
 }
 
+
+jira(){ 
+  local git_branch=$(git symbolic-ref --short HEAD 2>/dev/null)
+  if [ "$(uname -s)" = "Darwin" ]; then
+    open "https://charger1.atlassian.net/jira/software/c/projects/CHAR/boards/2?modal=detail&selectedIssue=${1:-$git_branch}"
+  else
+    xdg-open "https://charger1.atlassian.net/jira/software/c/projects/CHAR/boards/2?modal=detail&selectedIssue=${1:-$git_branch}"
+  fi
+}
+
 pipeline(){ 
   local git_branch=$(git symbolic-ref --short HEAD 2>/dev/null)
   if [ "$(uname -s)" = "Darwin" ]; then
-    open "https://dashboard.heroku.com/pipelines/35671cad-ce82-4ec6-8cb3-ff5fac810d48"
+    open "https://dashboard.heroku.com/pipelines/29dc61d7-2163-434b-94a4-edd61799b9e1"
   else
-    xdg-open "https://dashboard.heroku.com/pipelines/35671cad-ce82-4ec6-8cb3-ff5fac810d48"
+    xdg-open "https://dashboard.heroku.com/pipelines/29dc61d7-2163-434b-94a4-edd61799b9e1"
+  fi
+}
+
+lambda(){ 
+  local git_branch=$(git symbolic-ref --short HEAD 2>/dev/null)
+  if [ "$(uname -s)" = "Darwin" ]; then
+    open "https://us-west-2.console.aws.amazon.com/lambda/home?region=us-west-2#/functions"
+  else
+    xdg-open "https://us-west-2.console.aws.amazon.com/lambda/home?region=us-west-2#/functions"
+  fi
+}
+
+
+sqs(){ 
+  local git_branch=$(git symbolic-ref --short HEAD 2>/dev/null)
+  if [ "$(uname -s)" = "Darwin" ]; then
+    open "https://us-west-2.console.aws.amazon.com/sqs/v2/home?region=us-west-2"
+  else
+    xdg-open "https://us-west-2.console.aws.amazon.com/sqs/v2/home?region=us-west-2"
   fi
 }
 
@@ -129,8 +159,8 @@ function cd() {
 
   if [[ -z "$VIRTUAL_ENV" ]] ; then
     ## If env folder is found then activate the vitualenv
-      if [[ -d ./.env ]] ; then
-        source ./.env/bin/activate
+      if [[ -d ./.venv ]] ; then
+        source ./.venv/bin/activate
       fi
   else
     ## check the current folder belong to earlier VIRTUAL_ENV folder

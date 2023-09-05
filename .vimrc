@@ -48,7 +48,7 @@ set showcmd
 set showmatch
 set showmode
 
-colorscheme gruvbox
+" colorscheme gruvbox
 
 
 " ================ Custom Settings ========================
