@@ -1,3 +1,6 @@
 --css=tailwind
 --skip-test
 --skip-helpers
+--javascript=esbuild 
+--database=postgresql
+
