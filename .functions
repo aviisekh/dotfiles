@@ -30,7 +30,7 @@ goto() {
     if [[ $1 == "fleetpanda" ]]; then
         cd ~/Documents/workspace/fleetpanda/main
     elif [[ $1 == 'fluid' ]]; then
-        cd ~/Development/fluid
+        cd ~/Development/fluid/fluid
     elif [[ $1 == 'sequences' ]]; then
         cd ~/Development/sequences
     fi		
