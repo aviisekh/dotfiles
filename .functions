@@ -165,3 +165,17 @@ function cd() {
       fi
   fi
 }
+
+cpwifi() {
+    # Get the IP address of the Wi-Fi interface (en0)
+    ip_address=$(ipconfig getifaddr en0)
+
+    # Check if the command was successful
+    if [[ $? -eq 0 && -n $ip_address ]]; then
+        # Copy the IP address to the clipboard
+        echo -n "$ip_address" | pbcopy
+        echo "IP address ($ip_address) copied to clipboard."
+    else
+        echo "Failed to retrieve IP address. Ensure you're connected to Wi-Fi."
+    fi
+}

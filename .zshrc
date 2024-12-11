@@ -15,7 +15,7 @@ source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 source ~/.aliases 
 source ~/.functions
 source ~/.git-open-pr.sh
-
+source ~/Development/ai-gen-commit/.venv/bin/activate
 source $(brew --prefix nvm)/nvm.sh
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
@@ -29,3 +29,9 @@ typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
 
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/aviisekh/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/aviisekh/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/aviisekh/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/aviisekh/google-cloud-sdk/completion.zsh.inc'; fi
