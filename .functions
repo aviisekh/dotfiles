@@ -129,6 +129,26 @@ fluid(){
   fi
 }
 
+fluid-mobile() {
+  # Step 1: Get the current IP address
+  CURRENT_IP=$(ipconfig getifaddr en0) # For Mac
+  # Uncomment the line below for Linux systems
+  # CURRENT_IP=$(hostname -I | awk '{print $1}')
+
+  # Step 2: Change directory to the mobile app
+  cd  ~/Development/fluid/fluid-mobile || { echo "Failed to navigate to app directory"; return 1; }
+
+  # Step 3: Replace IP in config.ts
+  CONFIG_FILE="config.ts"
+  sed -i '' "s#BaseConfig.host = 'http://.*:3000'#BaseConfig.host = 'http://$CURRENT_IP:3000'#g" "$CONFIG_FILE"
+  sed -i '' "s#BaseConfig.socket = '.*:3000'#BaseConfig.socket = '$CURRENT_IP:3000'#g" "$CONFIG_FILE"
+
+  # Step 4: Use Node.js version and run yarn commands
+  nvm use
+  yarn install
+  yarn start:fluid-staging
+}
+
 
 # Example function
 #outerfunc1() {

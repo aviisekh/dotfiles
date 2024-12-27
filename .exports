@@ -19,3 +19,6 @@ export FZF_DEFAULT_OPTS='--height 50% --layout=reverse --border'
 export FZF_CTRL_T_OPTS="--preview 'bat --style=numbers --color=always --line-range :500 {}'"
 export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -200'"
 export FZF_CTRL_R_OPTS="--sort --preview 'echo {}'"
+export PROVIDER="ollama"
+export OLLAMA_MODEL="llama3.2"
+export OPENAI_MODEL="gpt-4-mini"
