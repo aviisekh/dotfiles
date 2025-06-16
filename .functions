@@ -1,10 +1,4 @@
-# Clean Debian packages
-apt-clean() {
 
-    sudo apt-get clean
-    sudo apt-get autoclean
-    sudo apt-get autoremove
-}
 
 # Create a new directory and enter it
 mkd() {
@@ -23,17 +17,6 @@ readme() {
 # Weather
 weather() {
     curl -s "https://wttr.in/${1:-Ponorogo}?m2" | sed -n "1,27p"
-}
-
-# Direct redirection
-goto() {
-    if [[ $1 == "fleetpanda" ]]; then
-        cd ~/Documents/workspace/fleetpanda/main
-    elif [[ $1 == 'fluid' ]]; then
-        cd ~/Development/fluid/fluid
-    elif [[ $1 == 'sequences' ]]; then
-        cd ~/Development/sequences
-    fi		
 }
 
 
@@ -55,16 +38,6 @@ jira(){
     xdg-open "https://charger1.atlassian.net/jira/software/c/projects/CHAR/boards/2?modal=detail&selectedIssue=${1:-$git_branch}"
   fi
 }
-
-pipeline(){ 
-  local git_branch=$(git symbolic-ref --short HEAD 2>/dev/null)
-  if [ "$(uname -s)" = "Darwin" ]; then
-    open "https://dashboard.heroku.com/pipelines/29dc61d7-2163-434b-94a4-edd61799b9e1"
-  else
-    xdg-open "https://dashboard.heroku.com/pipelines/29dc61d7-2163-434b-94a4-edd61799b9e1"
-  fi
-}
-
 lambda(){ 
   local git_branch=$(git symbolic-ref --short HEAD 2>/dev/null)
   if [ "$(uname -s)" = "Darwin" ]; then
@@ -85,30 +58,6 @@ sqs(){
 }
 
 
-fleetpanda(){
-  if [[ $# -eq 0 ]]; then 
-    goto fleetpanda	
-  elif [[ $1 == 'session' ]]; then
-    local session="fleetpanda"
-    if [[ -z "$TMUX" ]]; then
-      tmux has-session -t $session 2>/dev/null
-      if [ $? != 0 ]; then
-        tmux new -d -s $session -n main 
-        tmux send-keys -t $session:main "goto fleetpanda" Enter
-        tmux send-keys -t $session:main "bundle exec rails s" Enter
-        tmux attach -t $session:main
-      else
-        tmux attach-session -t $session
-      fi
-    fi
-  elif [[ $1 == 'deploy' ]]; then 
-   if [[ $3 == "-f" ]]; then
-    (git push fleetpanda-$2 $2:master -f)     
-   else
-    (git push fleetpanda-$2 $2:master)
-   fi 
-  fi
-}
 
 fluid(){
   if [[ $# -eq 0 ]]; then 
@@ -144,29 +93,14 @@ fluid-mobile() {
   sed -i '' "s#BaseConfig.socket = '.*:3000'#BaseConfig.socket = '$CURRENT_IP:3000'#g" "$CONFIG_FILE"
 
   # Step 4: Use Node.js version and run yarn commands
+  git checkout main
+  git pull origin main
   nvm use
   yarn install
-  yarn start:fluid-staging
+  yarn start:fluid-development
 }
 
 
-# Example function
-#outerfunc1() {
-# innerfunc() { echo "Running inner function #1"; }
-# echo "Running outer function #1"
-# }
-# outerfunc2() {
-# innerfunc() { echo "Running inner function #2"; }
-# echo "Running outer function #2"
-# } 
- 
-# test()(
-#   if [[ $1 == "abhishek" ]]; then
-#    (goto fleetpanda; ls)
-#   elif [[ $1 == "bhatta" ]]; then
-#     echo "Bhhatta"
-#   fi
-# )
 function cd() {
   builtin cd "$@"
 

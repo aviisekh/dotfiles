@@ -1,24 +1,24 @@
 export PATH=/opt/homebrew/bin:$PATH
-export PATH="$PATH:`pwd`/flutter/bin"
 export ZSH=~/.oh-my-zsh
-export NVM_DIR=~/.nvm
 export FILE="ranger"
 export TERMINAL="iterm"
 export VISUAL=vim
 export EDITOR="$VISUAL"
-export PATH="$HOME/.rbenv/bin:$PATH"
-
 
 # Support for ruby-2.5 for mac
-export PATH="/opt/homebrew/opt/openssl@1.1/bin:$PATH"
-export LDFLAGS="-L/opt/homebrew/opt/openssl@1.1/lib"
-export CPPFLAGS="-I/opt/homebrew/opt/openssl@1.1/include" 
-export PKG_CONFIG_PATH="/opt/homebrew/opt/openssl@1.1/lib/pkgconfig"
+# export PATH="/opt/homebrew/opt/openssl@1.1/bin:$PATH"
+# export LDFLAGS="-L/opt/homebrew/opt/openssl@1.1/lib"
+# export CPPFLAGS="-I/opt/homebrew/opt/openssl@1.1/include" 
+# export PKG_CONFIG_PATH="/opt/homebrew/opt/openssl@1.1/lib/pkgconfig"
 
 export FZF_DEFAULT_OPTS='--height 50% --layout=reverse --border'
 export FZF_CTRL_T_OPTS="--preview 'bat --style=numbers --color=always --line-range :500 {}'"
 export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -200'"
 export FZF_CTRL_R_OPTS="--sort --preview 'echo {}'"
+
 export PROVIDER="ollama"
-export OLLAMA_MODEL="llama3.2"
+export OLLAMA_MODEL="llama3.1"
 export OPENAI_MODEL="gpt-4-mini"
+
+export RUBY_CONFIGURE_OPTS="--enable-yjit"
+export RUBY_YJIT_ENABLE=1
