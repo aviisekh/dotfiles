@@ -164,6 +164,10 @@ xterm*|rxvt*)
             ;;
         esac
     }
+    # Initialize preexec_functions array if it doesn't exist
+    if [[ -z ${preexec_functions+x} ]]; then
+        preexec_functions=()
+    fi
     preexec_functions+=(update_tab_command)
     ;;
 *)
