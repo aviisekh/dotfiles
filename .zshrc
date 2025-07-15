@@ -57,3 +57,13 @@ eval "$(rbenv init -)"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 cat ~/.notes
+
+# Security: Prevent storing sensitive commands in history
+# Commands containing these patterns won't be saved to history
+HISTORY_IGNORE="(https://*:*@*|*password*|*token*|*key*|*secret*)"
+
+# Function to filter out sensitive commands from history
+zshaddhistory() {
+    emulate -L zsh
+    [[ $1 != ${~HISTORY_IGNORE} ]]
+}

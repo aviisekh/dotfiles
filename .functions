@@ -21,7 +21,19 @@ readme() {
 
 # Weather
 weather() {
-    curl -s "https://wttr.in/${1:-Ponorogo}?m2" | sed -n "1,27p"
+    # Validate input to prevent command injection
+    local location="${1:-Ponorogo}"
+    # Remove any characters that could be used for command injection
+    location=$(echo "$location" | sed 's/[^a-zA-Z0-9_-]//g')
+    # Limit length to prevent abuse
+    location=${location:0:50}
+    
+    if [[ -z "$location" ]]; then
+        echo "Error: Invalid location specified"
+        return 1
+    fi
+    
+    curl -s "https://wttr.in/${location}?m2" | sed -n "1,27p"
 }
 
 # Direct redirection
