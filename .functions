@@ -78,7 +78,7 @@ fluid(){
   fi
 }
 
-fluid-mobile() {
+fluid_mobile() {
   # Step 1: Get the current IP address
   CURRENT_IP=$(ipconfig getifaddr en0) # For Mac
   # Uncomment the line below for Linux systems
@@ -132,4 +132,51 @@ cpwifi() {
     else
         echo "Failed to retrieve IP address. Ensure you're connected to Wi-Fi."
     fi
+}
+
+fix_fluid_ip() {
+    # Define target files
+    local target_files=(
+        "/Users/aviisekh/Development/fluid/fluid-login/.env.local"
+        "/Users/aviisekh/Development/fluid/fluid-mobile/config.ts"
+        "/Users/aviisekh/Development/fluid/fluid-mobile/screens/SignIn/AuthWebView.tsx"
+    )
+    
+    # Get current IP address
+    local current_ip
+    current_ip=$(ipconfig getifaddr en0)
+    
+    if [ -z "$current_ip" ]; then
+        echo "Error: Could not get current IP address"
+        return 1
+    fi
+    
+    # Process each target file
+    local updated_count=0
+    for target_file in "${target_files[@]}"; do
+        if [ ! -f "$target_file" ]; then
+            continue
+        fi
+        
+        # Find IP addresses in the file and replace them
+        local ip_pattern='([0-9]{1,3}\.){3}[0-9]{1,3}'
+        local found_ips=$(grep -oE "$ip_pattern" "$target_file" | sort -u)
+        
+        if [ -n "$found_ips" ]; then
+            echo "$found_ips" | while read -r old_ip; do
+                if [ "$old_ip" != "$current_ip" ]; then
+                    sed -i.bak "s/$old_ip/$current_ip/g" "$target_file"
+                    rm -f "$target_file.bak"
+                fi
+            done
+            ((updated_count++))
+        fi
+    done
+    
+    echo "Updated $updated_count file(s) with IP: $current_ip"
+}
+
+fl() {
+  # Run the fluid-tmux session with any parameters
+  sh ~/dotfiles/fluid-tmux.sh "$@"
 }
