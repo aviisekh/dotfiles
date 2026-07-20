@@ -1,0 +1,138 @@
+"$schema" = "https://starship.rs/config-schema.json"
+
+add_newline = false
+scan_timeout = 30
+command_timeout = 800
+palette = "sleek"
+
+format = """
+$hostname\
+$directory\
+$git_branch\
+$git_status\
+$ruby\
+$nodejs\
+$docker_context\
+$line_break\
+$character"""
+
+right_format = "$status$jobs$cmd_duration$time"
+
+[palettes.sleek]
+blue = "#7aa2f7"
+cyan = "#7dcfff"
+green = "#9ece6a"
+muted = "#565f89"
+orange = "#ff9e64"
+purple = "#bb9af7"
+red = "#f7768e"
+yellow = "#e0af68"
+
+# Prompt character
+[character]
+success_symbol = "[›](bold green)"
+error_symbol = "[›](bold red)"
+vimcmd_symbol = "[‹](bold yellow)"
+
+# Current directory
+[directory]
+style = "bold blue"
+read_only_style = "red"
+format = "[$path]($style)[$read_only]($read_only_style) "
+truncation_length = 3
+truncate_to_repo = true
+fish_style_pwd_dir_length = 1
+read_only = " 󰌾 "
+
+[directory.substitutions]
+"Documents" = "󰈙 "
+"Downloads" = " "
+"Development" = "󰲋 "
+"Projects" = "󰲋 "
+
+# Git branch
+[git_branch]
+symbol = " "
+style = "purple"
+format = "[$symbol$branch]($style) "
+
+# Git working-tree status
+[git_status]
+style = "red"
+format = "[$all_status$ahead_behind]($style) "
+
+conflicted = "=${count} "
+ahead = "↑${count} "
+behind = "↓${count} "
+diverged = "↕↑${ahead_count}↓${behind_count} "
+untracked = "?${count} "
+stashed = "$${count} "
+modified = "!${count} "
+staged = "+${count} "
+renamed = "»${count} "
+deleted = "x${count} "
+
+# Ruby — shown only in Ruby projects
+[ruby]
+symbol = "rb "
+style = "red"
+format = "[$symbol($version)]($style) "
+
+# Node.js — shown only in Node projects
+[nodejs]
+symbol = "node "
+style = "green"
+format = "[$symbol($version)]($style) "
+
+# Docker context
+[docker_context]
+symbol = "dk "
+style = "cyan"
+format = "[$symbol$context]($style) "
+only_with_files = true
+
+# Show commands taking 1 second or longer
+[cmd_duration]
+min_time = 1000
+style = "yellow"
+format = " [$duration]($style)"
+
+# Show non-zero exit codes on the right
+[status]
+disabled = false
+symbol = "x "
+success_symbol = ""
+style = "red"
+format = "[$symbol$status]($style)"
+
+# Background jobs
+[jobs]
+symbol = "•"
+style = "yellow"
+format = " [$symbol$number]($style)"
+
+# Clock on the right
+[time]
+disabled = false
+time_format = "%H:%M"
+style = "muted"
+format = " [$time]($style)"
+
+# Show hostname only during SSH sessions
+[hostname]
+ssh_only = true
+style = "orange"
+format = "[$hostname]($style) "
+
+# Hide modules that usually create noise
+[aws]
+disabled = true
+
+[gcloud]
+disabled = true
+
+[package]
+disabled = true
+
+[battery]
+disabled = true

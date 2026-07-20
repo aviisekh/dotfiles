@@ -42,10 +42,18 @@
 # # Just for example:
 # resize-overlay-duration = 4s 200ms
 
+initial-window = false
+quit-after-last-window-closed = false
+
 keybind = global:cmd+`=toggle_quick_terminal
 quick-terminal-position = top
 quick-terminal-size = 45%
 quick-terminal-space-behavior = move
+
 background-opacity = 0.90
 background-blur-radius = 20
-theme = Catppuccin Frappe
+
+theme = Catppuccin Mocha
+
+font-family = MesloLGM Nerd Font
+font-size = 14
