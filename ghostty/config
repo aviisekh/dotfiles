@@ -42,13 +42,19 @@
 # # Just for example:
 # resize-overlay-duration = 4s 200ms
 
+# Start silently in the background
 initial-window = false
 quit-after-last-window-closed = false
 
+# Hide from Dock and Cmd+Tab
+macos-hidden = always
+
+# Floating terminal
 keybind = global:cmd+`=toggle_quick_terminal
 quick-terminal-position = top
 quick-terminal-size = 45%
 quick-terminal-space-behavior = move
+quick-terminal-autohide = true
 
 background-opacity = 0.80
 background-blur-radius = 20
