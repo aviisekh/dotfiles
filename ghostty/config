@@ -52,16 +52,20 @@ macos-hidden = always
 # Floating terminal
 keybind = global:cmd+`=toggle_quick_terminal
 quick-terminal-position = top
-quick-terminal-size = 45%
+quick-terminal-size = 50%
 quick-terminal-space-behavior = move
 quick-terminal-autohide = true
 
-background-opacity = 0.80
-background-blur-radius = 20
+background-opacity = 0.76
+background-blur-radius = 32
 
 theme = Catppuccin Mocha
 
-window-padding-x = 4
+window-padding-x = 8
+window-padding-y = 6
 
 font-family = MesloLGM Nerd Font
 font-size = 14
+
+cursor-style = block
+cursor-style-blink = true
